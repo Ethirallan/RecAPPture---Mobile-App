@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recappture2/helpers/components.dart';
+import 'package:recappture2/helpers/my_widgets.dart';
 import 'package:recappture2/helpers/my_colors.dart';
 
 class EndSlide extends StatelessWidget {

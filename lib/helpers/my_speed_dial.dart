@@ -4,6 +4,9 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:math' as math;
 import 'package:recappture2/helpers/my_colors.dart';
 
+
+// Custom floating action button for adding images which on press reveals 2 additional buttons
+
 class MySpeedDial extends StatefulWidget {
   @override
   State createState() => new MySpeedDialState();

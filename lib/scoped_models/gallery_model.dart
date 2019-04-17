@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:recappture2/model/my_data.dart';
 import 'package:recappture2/pages/home/home.dart';
 
+/*
+Scoped model for photo gallery (on second slide)
+  - page controller that navigates to the last photo added
+  - functions to check if gallery is full/empty aka if there are/are not 3 photos, add image and remove image
+ */
 class GalleryModel extends Model {
   PageController galleryCtrl = new PageController();
 

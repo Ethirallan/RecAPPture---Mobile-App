@@ -3,6 +3,13 @@ import 'package:recappture2/model/my_data.dart';
 import 'package:recappture2/pages/home/home.dart';
 import 'package:flutter/material.dart';
 
+/*
+Scoped model for wood quiz
+  - page controller for switching pages-questions (showing different pairs of images)
+  - showing the 'next' button if quiz is done
+  - keep track of the turn and counters for deciduous and coniferous
+  - functions for incrementing counters, saving answers (quiz1 ... quiz3) and selecting final value - woodType
+ */
 class WoodModel extends Model {
   int _myTurn = 0;
   int _deciduousCount = 0;

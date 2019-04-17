@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recappture2/helpers/components.dart';
+import 'package:recappture2/helpers/my_widgets.dart';
 import 'package:recappture2/helpers/my_colors.dart';
 import 'package:recappture2/scoped_models/wood_model.dart';
 
@@ -8,8 +8,7 @@ class WoodSlide extends StatefulWidget {
   WoodSlideState createState() => WoodSlideState();
 }
 
-class WoodSlideState extends State<WoodSlide>
-    with AutomaticKeepAliveClientMixin<WoodSlide> {
+class WoodSlideState extends State<WoodSlide> with AutomaticKeepAliveClientMixin<WoodSlide> {
   static final WoodModel woodModel = new WoodModel();
 
   @override
@@ -60,6 +59,7 @@ class WoodSlideState extends State<WoodSlide>
     );
   }
 
+  // Widget for displaying each page - question
   Widget woodPage(int index, Function funDeciduous, funConiferous) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
