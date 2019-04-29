@@ -1,4 +1,4 @@
-# RecAPPture - Mobile app
+# RecAPPture - Mobile App
 
 ### Mobile app for collecting waste wood.
 Users can offer their used wood for collection via 6 simple steps. MSORA will then contact the user, 
