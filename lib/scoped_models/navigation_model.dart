@@ -11,7 +11,6 @@ import 'package:recappture2/helpers/my_http_requests.dart';
 import 'package:recappture2/pages/wood/wood_slide.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:recappture2/helpers/my_geolocator.dart';
-import 'package:geolocator/geolocator.dart';
 
 
 /*
@@ -172,6 +171,8 @@ class NavigationModel extends Model {
               var coordinates = await getCoordinates(MyData.location);
               MyData.lat = coordinates.first.position.latitude;
               MyData.lng = coordinates.first.position.longitude;
+              print(MyData.lat);
+              print(MyData.lng);
             }
             bool done = await sendDataToTheServer();
             Navigator.pop(context);

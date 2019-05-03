@@ -50,3 +50,9 @@ Future<String> getAddress(double lat, double lng) async {
   String location = address + ' ' + houseNo + ', ' + postCode + ' ' + adminArea;
   return location;
 }
+
+// Get coordinates from an address
+Future<List<Placemark>> getCoordinates(String address) async {
+  List<Placemark> placemark = await Geolocator().placemarkFromAddress(address);
+  return placemark;
+}
