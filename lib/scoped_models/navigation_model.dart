@@ -10,6 +10,8 @@ import 'package:recappture2/pages/quantity/quantity_slide.dart';
 import 'package:recappture2/helpers/my_http_calls.dart';
 import 'package:recappture2/pages/wood/wood_slide.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:recappture2/helpers/my_geolocator.dart';
+import 'package:geolocator/geolocator.dart';
 
 class NavigationModel extends Model {
 
@@ -141,6 +143,11 @@ class NavigationModel extends Model {
                 return loadingDialog;
               },
             );
+            if (MyData.lat == null) {
+              var coordinates = await getCoordinates(MyData.location);
+              MyData.lat = coordinates.first.position.latitude;
+              MyData.lng = coordinates.first.position.longitude;
+            }
             bool done = await sendDataToTheServer();
             Navigator.pop(context);
             if (done) {
