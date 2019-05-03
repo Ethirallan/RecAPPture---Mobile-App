@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recappture2/helpers/components.dart';
+import 'package:recappture2/helpers/my_widgets.dart';
 import 'package:recappture2/helpers/my_colors.dart';
 import 'package:recappture2/pages/gallery/gallery_slide.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +13,12 @@ class CameraSlide extends StatefulWidget {
 
 class _CameraSlideState extends State<CameraSlide> with AutomaticKeepAliveClientMixin<CameraSlide> {
 
+  /*
+    - checks if the gallery is not yet full and then open camera/gallery
+    - if image is selected then add it to the gallery
+    - else show snackbar
+    - navigate to the next slide
+   */
   Future getImage(ImageSource source) async {
     if (!GallerySlideState.galleryModel.checkIfGalleryFull()) {
       File imgFile = await ImagePicker.pickImage(source: source);
@@ -66,6 +72,8 @@ class _CameraSlideState extends State<CameraSlide> with AutomaticKeepAliveClient
       ),
     );
   }
+
+  // makes sure that the slide is not being rebuild every time
   @override
   bool get wantKeepAlive => true;
 }

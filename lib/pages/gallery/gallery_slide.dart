@@ -10,10 +10,15 @@ class GallerySlide extends StatefulWidget {
   GallerySlideState createState() => GallerySlideState();
 }
 
-class GallerySlideState extends State<GallerySlide>
-    with AutomaticKeepAliveClientMixin<GallerySlide> {
+class GallerySlideState extends State<GallerySlide> with AutomaticKeepAliveClientMixin<GallerySlide> {
+
   static final GalleryModel galleryModel = new GalleryModel();
 
+  /*
+    - checks if the gallery is not yet full and then open camera/gallery
+    - if image is selected then add it to the gallery
+    - else show snackbar
+   */
   Future getImage(ImageSource source, BuildContext context) async {
     if (!galleryModel.checkIfGalleryFull()) {
       File imgFile = await ImagePicker.pickImage(source: source);
@@ -21,8 +26,7 @@ class GallerySlideState extends State<GallerySlide>
         galleryModel.addImage(imgFile.path);
       }
     } else {
-      Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text('Maksimalno število slik doseženo (3/3)!')));
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Maksimalno število slik doseženo (3/3)!')));
     }
   }
 
@@ -89,6 +93,7 @@ class GallerySlideState extends State<GallerySlide>
     );
   }
 
+  // makes sure that the slide is not being rebuild every time
   @override
   bool get wantKeepAlive => true;
 }

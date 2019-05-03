@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recappture2/helpers/components.dart';
+import 'package:recappture2/helpers/my_widgets.dart';
 import 'package:recappture2/helpers/my_colors.dart';
 import 'package:recappture2/helpers/validators.dart';
 import 'package:recappture2/model/my_data.dart';
@@ -14,6 +14,7 @@ class QuantitySlideState extends State<QuantitySlide> with AutomaticKeepAliveCli
 
   static GlobalKey<FormState> quantityKey = new GlobalKey<FormState>();
 
+  //function which is being called from navigation model
   static bool validateQuantity() {
     if (quantityKey.currentState.validate()) {
       quantityKey.currentState.save();
@@ -63,6 +64,8 @@ class QuantitySlideState extends State<QuantitySlide> with AutomaticKeepAliveCli
       ),
     );
   }
+
+  // makes sure that the slide is not being rebuild every time
   @override
   bool get wantKeepAlive => true;
 }

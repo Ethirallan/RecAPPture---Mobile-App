@@ -1,14 +1,12 @@
+/*
+A class holding all data, that will be sent to the database
+ */
+
 class MyData {
   static List<String> photoList = [
     '',
     '',
     '',
-  ];
-
-  static List<String> imgBackList = [
-    'assets/photo1.png',
-    'assets/photo2.png',
-    'assets/photo3.png',
   ];
 
   static String location;
@@ -24,17 +22,4 @@ class MyData {
 
   static int userId;
   static int orderId;
-
-  static void printData() {
-    print('loc: ' + location);
-    print('lat: ' + lat.toString());
-    print('lng: ' + lng.toString());
-    print('quan: ' + quantity.toString());
-    print('type: ' + woodType.toString());
-    print('q1 ' + quiz1.toString());
-    print('q2: ' + quiz2.toString());
-    print('q3: ' + quiz3.toString());
-    print('phone: ' + phone);
-    print('mail: ' + email);
-  }
 }

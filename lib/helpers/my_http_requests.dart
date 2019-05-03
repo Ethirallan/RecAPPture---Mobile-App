@@ -4,8 +4,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:recappture2/model/my_data.dart';
 
+//Endpoint
 const String api = 'http://88.200.63.178:3000';
 
+//Posting data to the server, onError return false
 Future<bool> sendDataToTheServer() async {
 
   var url;
@@ -13,7 +15,7 @@ Future<bool> sendDataToTheServer() async {
   Map data;
   bool result = true;
 
-  //Send user
+  //Send user___________________________________________________________________________
   url = '$api/user';
 
   data = {
@@ -34,7 +36,7 @@ Future<bool> sendDataToTheServer() async {
     return result;
   }
 
-  //Send order
+  //Send order___________________________________________________________________________
   url = '$api/order/';
   data = {
     'user_id': MyData.userId,
@@ -54,7 +56,7 @@ Future<bool> sendDataToTheServer() async {
   if (!result) {
     return result;
   }
-  //send quiz
+  //send quiz___________________________________________________________________________
   url = '$api/quiz/';
   data = {
     'order_id': MyData.orderId,
@@ -72,7 +74,7 @@ Future<bool> sendDataToTheServer() async {
     return result;
   }
 
-  //sending photos
+  //sending photos___________________________________________________________________________
   url = '$api/image/';
   String orderId = MyData.orderId.toString();
 

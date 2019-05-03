@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recappture2/helpers/components.dart';
+import 'package:recappture2/helpers/my_widgets.dart';
 import 'package:recappture2/helpers/my_colors.dart';
 import 'package:recappture2/helpers/validators.dart';
 import 'package:recappture2/helpers/my_geolocator.dart';
@@ -13,13 +13,14 @@ class LocationSlide extends StatefulWidget {
   LocationSlideState createState() => LocationSlideState();
 }
 
-class LocationSlideState extends State<LocationSlide>
-    with AutomaticKeepAliveClientMixin<LocationSlide> {
+class LocationSlideState extends State<LocationSlide> with AutomaticKeepAliveClientMixin<LocationSlide> {
+
   static GlobalKey<FormState> locationKey = new GlobalKey<FormState>();
   static TextEditingController locationCtrl = new TextEditingController();
   bool autoVal = false;
   bool isGettingLocation = false;
 
+  //function which is being called from navigation model
   static bool validateLocation() {
     if (locationKey.currentState.validate()) {
       locationKey.currentState.save();
@@ -28,23 +29,19 @@ class LocationSlideState extends State<LocationSlide>
     return false;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    void getLocationDetails() async {
-      String res = await getLocationStatus();
-      if (res == 'Denied') {
-        await PermissionHandler().requestPermissions([PermissionGroup.location]);
-        if (await PermissionHandler().checkPermissionStatus(PermissionGroup.location) == PermissionStatus.granted) {
-          showDialog(
-              barrierDismissible: true,
-              context: context,
-              builder: (BuildContext context) {
-                return locationDialog;
-              });
-          locationCtrl.text = await getLocation();
-          Navigator.pop(context);
-        }
-      } else if (res == 'Enabled') {
+  /*
+    - checks location status:
+      - denied:
+        - ask user for permission
+        - check if permission is granted -> get location if yes
+      - enabled -> get location
+      - disabled -> popup notifying user that GPS is turned off
+   */
+  void getLocationDetails() async {
+    String res = await getLocationStatus();
+    if (res == 'Denied') {
+      await PermissionHandler().requestPermissions([PermissionGroup.location]);
+      if (await PermissionHandler().checkPermissionStatus(PermissionGroup.location) == PermissionStatus.granted) {
         showDialog(
             barrierDismissible: true,
             context: context,
@@ -53,21 +50,34 @@ class LocationSlideState extends State<LocationSlide>
             });
         locationCtrl.text = await getLocation();
         Navigator.pop(context);
-      } else if (res == 'Disabled') {
-        showDialog(
+      }
+    } else if (res == 'Enabled') {
+      showDialog(
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return openLocationSettings(context);
-          },
-        );
-      } else {
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('Lokacija: ' + res),
-          duration: Duration(seconds: 2),
-        ));
-      }
+            return locationDialog;
+          });
+      locationCtrl.text = await getLocation();
+      Navigator.pop(context);
+    } else if (res == 'Disabled') {
+      showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return openLocationSettings(context);
+        },
+      );
+    } else {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Lokacija: ' + res),
+        duration: Duration(seconds: 2),
+      ));
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 50, right: 50),
       child: Form(
@@ -124,6 +134,7 @@ class LocationSlideState extends State<LocationSlide>
     );
   }
 
+  // makes sure that the slide is not being rebuild every time
   @override
   bool get wantKeepAlive => true;
 }

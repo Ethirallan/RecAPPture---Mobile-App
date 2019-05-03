@@ -13,12 +13,14 @@ import 'package:recappture2/pages/location/location_slide.dart';
 import 'package:recappture2/pages/wood/wood_slide.dart';
 import 'package:recappture2/pages/gallery/gallery_slide.dart';
 
+// Main page - scaffold containing a stack: pageView with all pages - slides, back and next button
 class Home extends StatefulWidget {
   @override
   HomeState createState() => HomeState();
 }
 
 class HomeState extends State<Home> {
+
   static final NavigationModel navigationModel = new NavigationModel();
 
   CameraSlide cameraSlide = new CameraSlide();
@@ -34,6 +36,7 @@ class HomeState extends State<Home> {
     return ScopedModel<NavigationModel>(
       model: navigationModel,
       child: WillPopScope(
+        //connect back button on android to navigation model
         onWillPop: () async {
           if (navigationModel.page == 0) {
             showDialog(
@@ -50,6 +53,7 @@ class HomeState extends State<Home> {
           }
         },
         child: GestureDetector(
+          //dismiss keyboard on tap outside the input field
           onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
           child: Scaffold(
               resizeToAvoidBottomPadding: false,

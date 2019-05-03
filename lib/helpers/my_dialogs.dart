@@ -4,6 +4,12 @@ import 'package:recappture2/helpers/my_colors.dart';
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 
+/*
+Loading dialog
+  - onWillPop disables dismissing the popup via pressing outside of it or by pressing back button on android
+  - loading animation
+  - text
+ */
 Widget loadingDialog = WillPopScope(
   onWillPop: () async {
     return new Future(() => false);
@@ -29,6 +35,12 @@ Widget loadingDialog = WillPopScope(
   ),
 );
 
+/*
+Network dialog
+  - popup with two buttons
+  - props the user to open wifi settings
+  - open settings if user presses 'DA'
+ */
 void networkDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -42,14 +54,14 @@ void networkDialog(BuildContext context) {
         actions: <Widget>[
           FlatButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Ne'),
+            child: Text('NE'),
           ),
           FlatButton(
             onPressed: () {
               Navigator.pop(context);
               AppSettings.openWIFISettings();
             },
-            child: Text('Da'),
+            child: Text('DA'),
           ),
         ],
       );
@@ -57,6 +69,10 @@ void networkDialog(BuildContext context) {
   );
 }
 
+/*
+Http error dialog
+  - informing user there was a problem with posting data to the server
+ */
 Widget onErrorDialog(BuildContext context) {
   return AlertDialog(
     title: Text(
@@ -87,6 +103,11 @@ Widget onErrorDialog(BuildContext context) {
   );
 }
 
+/*
+Location dialog
+  - onWillPop disables dismissing the popup via pressing outside of it or by pressing back button on android
+  - loading animation (while getting position)
+ */
 Widget locationDialog = WillPopScope(
   onWillPop: () async {
     return new Future(() => false);
@@ -112,6 +133,12 @@ Widget locationDialog = WillPopScope(
   ),
 );
 
+/*
+Exit dialog
+  - onWillPop disables dismissing the popup via pressing outside of it or by pressing back button on android
+  - asking user if he/she really wants to exit the app
+  - two buttons: dismiss or exit the app
+ */
 Widget exitDialog(BuildContext context) {
   return WillPopScope(
     onWillPop: () async {
@@ -156,7 +183,14 @@ Widget exitDialog(BuildContext context) {
   );
 }
 
+/*
+OpenLocationSettings dialog
+  - informing user that location is turned off
+  - prompting to open location settings
+  - open settings if 'ODPRI' is pressed
+ */
 Widget openLocationSettings(BuildContext context) {
+  //function for opening location settings
   openSettingsMenu() async {
     var resultSettingsOpening = false;
     try {
@@ -167,7 +201,6 @@ Widget openLocationSettings(BuildContext context) {
     }
     return resultSettingsOpening;
   }
-
 
   return AlertDialog(
     title: Text(

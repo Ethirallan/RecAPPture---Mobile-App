@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:recappture2/model/my_data.dart';
 
 
+// Get location status and return it
 Future<String> getLocationStatus() async {
   GeolocationStatus status = await Geolocator().checkGeolocationPermissionStatus();
 
@@ -23,7 +24,7 @@ Future<String> getLocationStatus() async {
   }
 }
 
-// Get location
+// Try to get location coordinates and if successful then search for the address
 Future<String> getLocation() async {
   String myLocation;
   try {
@@ -39,7 +40,7 @@ Future<String> getLocation() async {
   return myLocation;
 }
 
-// Get address
+// Get address from gps coordinates
 Future<String> getAddress(double lat, double lng) async {
   List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(lat, lng, localeIdentifier: 'sl_SI');
   String postCode = placemark[0].postalCode;
@@ -48,11 +49,4 @@ Future<String> getAddress(double lat, double lng) async {
   String houseNo = placemark[0].subThoroughfare;
   String location = address + ' ' + houseNo + ', ' + postCode + ' ' + adminArea;
   return location;
-}
-
-// Get coordinates
-Future<List<Placemark>> getCoordinates(String address) async {
-  List<Placemark> placemark = await Geolocator().placemarkFromAddress(address);
-  print(placemark.first.position.longitude);
-  return placemark;
 }

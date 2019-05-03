@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recappture2/helpers/components.dart';
+import 'package:recappture2/helpers/my_widgets.dart';
 import 'package:recappture2/helpers/my_colors.dart';
 import 'package:recappture2/helpers/validators.dart';
 import 'package:recappture2/model/my_data.dart';
@@ -15,7 +15,9 @@ class ContactSlideState extends State<ContactSlide> with AutomaticKeepAliveClien
   static bool autoValEmail = false;
   static bool autoValPhone = false;
   static GlobalKey<FormState> contactKey = new GlobalKey<FormState>();
-  final FocusNode phoneNode = new FocusNode();
+  final FocusNode phoneNode = new FocusNode(); //for changing focus from one input to the another
+
+  //function which is being called from navigation model
   static bool validateContacts() {
     if (contactKey.currentState.validate()) {
       contactKey.currentState.save();
@@ -100,6 +102,7 @@ class ContactSlideState extends State<ContactSlide> with AutomaticKeepAliveClien
     );
   }
 
+  // makes sure that the slide is not being rebuild every time
   @override
   bool get wantKeepAlive => true;
 }

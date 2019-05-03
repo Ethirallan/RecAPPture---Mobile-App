@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:recappture2/helpers/my_colors.dart';
 
+// A file with custom widgets used for building pages
+
 class MyText extends StatelessWidget {
   MyText({this.text, this.size, this.fontWeight, this.color});
   final String text;
   final double size;
-  final FontWeight fontWeight;
+  final FontWeight fontWeight; //bold, italic ...
   final Color color;
   @override
   Widget build(BuildContext context) {
