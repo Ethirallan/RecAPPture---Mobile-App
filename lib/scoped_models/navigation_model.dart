@@ -168,11 +168,10 @@ class NavigationModel extends Model {
               },
             );
             if (MyData.lat == null) {
-              var coordinates = await getCoordinates(MyData.location);
-              MyData.lat = coordinates.first.position.latitude;
-              MyData.lng = coordinates.first.position.longitude;
-              print(MyData.lat);
-              print(MyData.lng);
+              await getCoordinates(MyData.location).then((coordinates) {
+                MyData.lat = coordinates.first.position.latitude;
+                MyData.lng = coordinates.first.position.longitude;
+              }, onError: (err) => print(err));
             }
             bool done = await sendDataToTheServer();
             Navigator.pop(context);

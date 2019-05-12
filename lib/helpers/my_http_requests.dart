@@ -3,13 +3,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:recappture2/model/my_data.dart';
-
-//Endpoint
-const String api = 'http://88.200.63.178:3000';
+import 'package:recappture2/environment_variables.dart';
 
 //Posting data to the server, onError return false
 Future<bool> sendDataToTheServer() async {
-
   var url;
   var myData;
   Map data;
@@ -20,14 +17,13 @@ Future<bool> sendDataToTheServer() async {
 
   data = {
     'email': MyData.email,
-    'phone_number': MyData.phone,
-    'admin': '0'
+    'phone_number': MyData.phone
   };
 
   await http.post(url, headers: {'Content-Type': 'application/json'}, body: json.encode(data)
   ).then((res) {
     myData = jsonDecode(res.body);
-    MyData.userId = myData['message']['insertId'];
+    MyData.userId = myData['insertId'];
   }).catchError((err) {
     result = false;
   });
@@ -56,6 +52,7 @@ Future<bool> sendDataToTheServer() async {
   if (!result) {
     return result;
   }
+
   //send quiz___________________________________________________________________________
   url = '$api/quiz/';
   data = {
